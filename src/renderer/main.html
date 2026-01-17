@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>休息闹钟</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="app-bg">
+    <div class="container">
+      <header class="top">
+        <div>
+          <div class="badge" id="phaseBadge">工作中</div>
+          <h1 class="title">休息闹钟</h1>
+        </div>
+        <div class="tiny" id="tips">默认：20 分钟提醒休息，休息 20 秒。</div>
+      </header>
+
+      <section class="panel">
+        <div class="ring" id="ring">
+          <div class="ring-inner">
+            <div class="time" id="timeText">20:00</div>
+            <div class="sub" id="subText">保持专注，别忘了抬头放松</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="btn primary" id="btnStart">开始</button>
+          <button class="btn" id="btnPause">暂停</button>
+          <button class="btn" id="btnReset">重置</button>
+        </div>
+
+        <div class="row">
+          <button class="btn danger" id="btnSkipBreak">立即休息</button>
+          <button class="btn" id="btnSkipWork">结束休息</button>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top: 14px;">
+        <h2 class="h2">自动设置</h2>
+        <div class="form">
+          <label class="field">
+            <span>工作时长（分钟）</span>
+            <input id="workMinutes" type="number" min="1" max="180" step="1" />
+          </label>
+          <label class="field">
+            <span>休息时长（秒）</span>
+            <input id="breakSeconds" type="number" min="5" max="600" step="1" />
+          </label>
+          <label class="field checkbox">
+            <input id="autoStartNext" type="checkbox" />
+            <span>自动开始下一轮</span>
+          </label>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+          <button class="btn" id="btnSave">保存设置</button>
+        </div>
+        <div class="tiny" id="savedHint" style="opacity: 0;">已保存</div>
+      </section>
+
+      <footer class="footer tiny">
+        <div>提示：休息时会弹出全屏醒目提醒页。</div>
+      </footer>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>
+

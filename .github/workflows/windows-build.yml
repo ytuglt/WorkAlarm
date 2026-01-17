@@ -1,0 +1,43 @@
+name: Build Windows (NSIS)
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (Windows NSIS)
+        env:
+          # 加速 Electron / electron-builder 相关二进制下载
+          ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
+          ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
+        run: npm run dist -- -w
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: WorkAlarm-windows
+          path: |
+            dist/*.exe
+            dist/*.yml
+            dist/*.blockmap
+

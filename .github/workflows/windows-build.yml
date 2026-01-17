@@ -30,7 +30,8 @@ jobs:
           # 加速 Electron / electron-builder 相关二进制下载
           ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
           ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
-        run: npm run dist -- -w
+        # 禁止在 CI 上自动发布到 GitHub Release（避免要求 GH_TOKEN）
+        run: npm run dist -- -w --publish never
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -40,4 +41,3 @@ jobs:
             dist/*.exe
             dist/*.yml
             dist/*.blockmap
-
